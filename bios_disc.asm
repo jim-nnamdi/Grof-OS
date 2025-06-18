@@ -27,9 +27,13 @@ disc_error:
     call print 
     call print_nl
     mov dh, ah 
+    jmp disc_loop
 
     popa                     ; free all the registers from the stack memory
     ret 
+
+disc_loop:
+    jmp $
 
 ; routine to read the errors from the sector
 ; if the numbers read are != sector number in 0x02
@@ -39,6 +43,3 @@ sector_error:
 
 DISC_ERRORS: db 'error reading from disc', 0 
 SECTOR_ERRORS: db 'invalid number of sectors', 0
-
-times 510-($-$$) db 0   ; bootloader needs 512 bytes of mem. so we pad the rest
-dw 0xaa55               ; memory location offset for bootloader
