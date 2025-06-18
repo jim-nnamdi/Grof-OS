@@ -22,3 +22,5 @@ init_pm:                    ; switched to 32-bit at this point
 
     mov ebp, 0x90000 
     mov esp, ebp 
+
+    call begin_pm
