@@ -14,6 +14,10 @@
     mov dx, [0x90000 + 512]             ; get the second value from disc
     call print_hex
 
+%include "./bios_print.asm"
+%include "./bios_hex.asm"
+%include "./bios_disc.asm"
+
 times 510-($-$$) db 0   ; bootloader needs 512 bytes of mem. so we pad the rest
 dw 0xaa55               ; memory location offset for bootloader
 
