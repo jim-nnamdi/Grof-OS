@@ -3,3 +3,33 @@
 ; 16-bit real mode to the 32-bit protected mode which allows
 ; interrupts. device drivers and a full fledged kernel
 
+gdt_start:                  ; the labels are important for size calculations and
+                            ; memory allocation
+    dd 0x00 
+    dd 0x00                 ; the gdt requires a null descriptor of 8 bytes for a start
+
+; global descriptor for the code segment
+gdt_code:
+    mov dw, 0xffff          ; segment limit
+    mov dw, 0x00            ; segment base 
+    mov db, 0x00            
+    mov db, 10011010b       ; access flags for first bits
+    mov db, 11001111b       ; access flags for last upper '7' bits
+    mov db, 0x00 
+
+gdt_data:
+    mov dw, 0xffff          ; segment limit
+    mov dw, 0x00            ; segment base
+    mov db, 0x00            
+    mov db, 10011010b       ; access flags for first bits
+    mov db, 11001111b       ; access flags for last upper bits
+    mov db, 0x00
+
+gdt_end:
+
+gdt_descriptor:             ; the gdt needs a 6 bytes initialisation proc
+    dw gdt_end - gdt_start - 1
+    dd gdt_start
+
+CODE_SEG equ gdt_code - gdt_start   ; code segment 
+DATA_SEG equ gdt_data - gdt_start   ; data segment
