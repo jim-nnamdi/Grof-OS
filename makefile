@@ -9,7 +9,7 @@ all: run
 kernel.bin: kernel_entry.o kernel.o
 	i386-elf-ld -o $@ -Ttext 0x1000 $^ --oformat binary
 
-kernel_entry.o: kernel_entry.asm
+kernel_entry.o: kernel.asm
 	nasm $< -f elf -o $@
 
 kernel.o: kernel.c
@@ -19,14 +19,14 @@ kernel.o: kernel.c
 kernel.dis: kernel.bin
 	ndisasm -b 32 $< > $@
 
-bootsect.bin: bootsect.asm
+bootsect.bin: boot_sect.asm
 	nasm $< -f bin -o $@
 
 os-image.bin: bootsect.bin kernel.bin
 	cat $^ > $@
 
 run: os-image.bin
-	qemu-system-i386 -fda $<
+	qemu-system-i386 -drive format=raw,file=$<
 
 clean:
 	rm *.bin *.o *.dis

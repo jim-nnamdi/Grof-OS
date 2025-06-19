@@ -31,17 +31,15 @@ disc_error:
     call print_hex
     jmp disc_loop
 
-    popa                     ; free all the registers from the stack memory
-    ret 
-
-disc_loop:
-    jmp $
-
 ; routine to read the errors from the sector
 ; if the numbers read are != sector number in 0x02
 sector_error:
     mov bx, SECTOR_ERRORS 
     call print 
+
+disc_loop:
+    jmp $
+    
 
 DISC_ERRORS: db 'error reading from disc', 0 
 SECTOR_ERRORS: db 'invalid number of sectors', 0
