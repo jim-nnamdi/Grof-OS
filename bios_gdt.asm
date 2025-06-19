@@ -10,7 +10,7 @@ gdt_start:                  ; the labels are important for size calculations and
 
 ; global descriptor for the code segment
 gdt_code:
-    dw 0xffff          ; segment limit
+    dw 0xffff         ; segment limit
     dw 0x0            ; segment base 
     db 0x0            
     db 10011010b       ; access flags for first bits
@@ -19,7 +19,7 @@ gdt_code:
 
 gdt_data:
     dw 0xffff          ; segment limit
-    dw 0x0            ; segment base
+    dw 0x0             ; segment base
     db 0x0            
     db 10011010b       ; access flags for first bits
     db 11001111b       ; access flags for last upper bits
