@@ -6,7 +6,7 @@ print:
 start:
     mov al, [bx]            ; move the value in the base register to 'al'
     cmp al, 0x0             ; check if the value in 'al' is 0 which is null terminator
-    je end                  ; jump to the end if value is 0
+    je ends                  ; jump to the end if value is 0
 
     mov ah, 0x0e            ; bios teletype output interrupt
     int 0x10                ; bios video interrupt for screen
@@ -14,7 +14,7 @@ start:
     add bx, 1               ; increment the value of bx for string ops
     jmp start               ; iterate through the string again
 
-end:
+ends:
     popa                    ; free the registers from the stack memory
     ret                     
 

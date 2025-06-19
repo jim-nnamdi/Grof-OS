@@ -7,6 +7,7 @@ disc_load:
     push dx                 ; using 'dx' to store extra data
                             ; 'dh' stores sector number 'dl' stores drive number
 
+    mov ah, 0x02            ; bios read interrupt
     mov al, dh              ; how many sectors do we want to read
     mov cl, 0x02            ; start reading from the second sector first sector is the boot sector
     mov ch, 0x00            ; cylinder number for current sector
@@ -27,6 +28,7 @@ disc_error:
     call print 
     call print_nl
     mov dh, ah 
+    call print_hex
     jmp disc_loop
 
     popa                     ; free all the registers from the stack memory
