@@ -5,25 +5,25 @@
 
 gdt_start:                  ; the labels are important for size calculations and
                             ; memory allocation
-    dd 0x00 
-    dd 0x00                 ; the gdt requires a null descriptor of 8 bytes for a start
+    dd 0x0
+    dd 0x0                  ; the gdt requires a null descriptor of 8 bytes for a start
 
 ; global descriptor for the code segment
 gdt_code:
-    mov dw, 0xffff          ; segment limit
-    mov dw, 0x00            ; segment base 
-    mov db, 0x00            
-    mov db, 10011010b       ; access flags for first bits
-    mov db, 11001111b       ; access flags for last upper '7' bits
-    mov db, 0x00 
+    dw 0xffff          ; segment limit
+    dw 0x0            ; segment base 
+    db 0x0            
+    db 10011010b       ; access flags for first bits
+    db 11001111b       ; access flags for last upper '7' bits
+    db 0x0 
 
 gdt_data:
-    mov dw, 0xffff          ; segment limit
-    mov dw, 0x00            ; segment base
-    mov db, 0x00            
-    mov db, 10011010b       ; access flags for first bits
-    mov db, 11001111b       ; access flags for last upper bits
-    mov db, 0x00
+    dw 0xffff          ; segment limit
+    dw 0x0            ; segment base
+    db 0x0            
+    db 10011010b       ; access flags for first bits
+    db 11001111b       ; access flags for last upper bits
+    db 0x0
 
 gdt_end:
 

@@ -6,7 +6,7 @@
 kernel_offset   equ 0x1000      ; kernel offset for memory
 
     mov [boot_drive], dl        ; dl holds drive number from disc
-    mov bp, 0x90000             ; load stack memory location
+    mov bp, 0x9000             ; load stack memory location
     mov sp, bp                  ; stack now points to '0x90000'
 
     mov bx, MSG_LOAD_REAL       ; Loading 16-bit real mode
@@ -44,9 +44,9 @@ begin_pm:                       ; Loading data in 32 bit mode
     jmp $ 
 
 boot_drive db 0 
-MSG_LOAD_KERN db 'loading kernel', 0
-MSG_LOAD_PROT db 'loading 32-bit protected mode', 0
-MSG_LOAD_REAL db 'loading 16-bit real mode', 0 
+MSG_LOAD_KERN db 'loading GrofOS kernel', 0
+MSG_LOAD_PROT db 'loading GrofOS 32-bit protected mode', 0
+MSG_LOAD_REAL db 'loading GrofOS 16-bit real mode', 0 
 
 times 510 - ($-$$) db 0 
 dw 0xaa55
