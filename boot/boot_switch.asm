@@ -11,6 +11,7 @@ switch_to_pm:
     mov cr0, eax 
     jmp CODE_SEG:init_pm 
 
+
 [bits 32]
 init_pm:                    ; switched to 32-bit at this point
     mov ax, DATA_SEG        ; set the data segment and pass values to other segments
@@ -24,3 +25,6 @@ init_pm:                    ; switched to 32-bit at this point
     mov esp, ebp 
 
     call begin_pm
+
+CODE_SEG equ 0x08 
+DATA_SEG equ 0x10
