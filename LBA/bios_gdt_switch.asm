@@ -11,6 +11,7 @@ switch_to_pm:
     jmp CODE_SEG:pm_entry    ; jump far to the protected mode
 
 %include "./bios_gdt.asm"
+%include "./kprint.asm"
         
 [bits 32]
 pm_entry:
